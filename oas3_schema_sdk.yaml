@@ -1,0 +1,2568 @@
+openapi: 3.0.3
+info:
+  title: Vitruvi SDK APIs
+  version: 2.0.0
+  description: Vitruvi SDK API reference. This API schema is used solely for the auto
+    generation of the Vitruvi SDK libraries.
+paths:
+  /api/v1/companies/:
+    get:
+      operationId: api_v1_companies_list
+      description: Returns a list of all companies including network operators, subcontractors
+        and EPCs.
+      summary: List Companies
+      parameters:
+      - in: query
+        name: code
+        schema:
+          type: string
+        description: Select only the company with the specified code. For more flexible
+          search options, use the search parameter.
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: is_active
+        schema:
+          type: boolean
+        description: Set to true to only list active companies.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: 'A term that will be (case-insensitive) searched for in each
+          of the fields: (''name'', ''code'', ''description'')'
+      - in: query
+        name: type
+        schema:
+          type: string
+          enum:
+          - EPC
+          - 'NO'
+          - SC
+        description: Type can be one of 'NO' (network operator), 'SC' (subcontractor)
+          or 'EPC'.
+      - in: query
+        name: with_no_subcontract
+        schema:
+          type: integer
+        description: Filter companies of any type that no have a Subcontract within
+          the same Program. Enter the Program ID to filter the list of companies by.
+      - in: query
+        name: with_subcontract_or_epc
+        schema:
+          type: integer
+        description: Filter companies of any type that have a Subcontract within the
+          same Program, or the EPC Company itself. Enter the Program ID to filter
+          the list of companies by.
+      tags:
+      - Global Configuration
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCompanyList'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    post:
+      operationId: api_v1_companies_create
+      description: Creates a new company record.
+      summary: Create Company
+      tags:
+      - Global Configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Company'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Company'
+        required: true
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/companies/{id}/:
+    get:
+      operationId: api_v1_companies_retrieve
+      description: Retrieve company record using the parameter criteria.
+      summary: Retrieve Company
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this company.
+        required: true
+      tags:
+      - Global Configuration
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    put:
+      operationId: api_v1_companies_update
+      description: Update company record using the parameter criteria.
+      summary: Update Company
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this company.
+        required: true
+      tags:
+      - Global Configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Company'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Company'
+        required: true
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    patch:
+      operationId: api_v1_companies_partial_update
+      description: Partial update company record using the parameter criteria.
+      summary: Partial Update Company
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this company.
+        required: true
+      tags:
+      - Global Configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCompany'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCompany'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCompany'
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    delete:
+      operationId: api_v1_companies_destroy
+      description: Destroy company record using the parameter criteria.
+      summary: Destroy Company
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this company.
+        required: true
+      tags:
+      - Global Configuration
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/companies/{id}/download_logo/:
+    get:
+      operationId: api_v1_companies_download_logo_retrieve
+      description: Downloads company logo by company id.
+      summary: Get Company Logo
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this company.
+        required: true
+      tags:
+      - Global Configuration
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/engineering/design_elements_query:
+    get:
+      operationId: api_v1_engineering_design_elements_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Design Elements Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: ids
+        schema:
+          type: array
+          items:
+            type: integer
+        description: List of IDs to include in query.
+        required: true
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/engineering/design_elements_work_items_query:
+    get:
+      operationId: api_v1_engineering_design_elements_work_items_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Design Elements Work Items Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/engineering/limited_design_elements_query:
+    get:
+      operationId: api_v1_engineering_limited_design_elements_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Limited Design Elements Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: ids
+        schema:
+          type: array
+          items:
+            type: integer
+        description: List of IDs to include in query.
+        required: true
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/invoicing/invoice_items_query:
+    get:
+      operationId: api_v1_invoicing_invoice_items_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Invoice Items Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/invoicing/invoices_query:
+    get:
+      operationId: api_v1_invoicing_invoices_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Invoices Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/job_status/{id}:
+    get:
+      operationId: api_v1_job_status_retrieve
+      description: API calls that run asyncronous jobs will return a 200 response
+        with a UUID representing the job ID.
+      summary: Get Job Status
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: The UUID (ID) of the job returned from the async API.
+        required: true
+      tags:
+      - Jobs
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncApiResult'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/production/production_report_grid_query:
+    get:
+      operationId: api_v1_production_production_report_grid_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Production Report Grid Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/production/production_reports_query:
+    get:
+      operationId: api_v1_production_production_reports_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Production Reports Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/raw/{app_label}/{model_name}:
+    get:
+      operationId: api_v1_raw_retrieve
+      description: |2
+
+        For applications where performance is of high importance, the raw API can be used to access data for each data model directly without calculations, manipulations or user level security.
+
+        Please note however that as this API is designed for performance and returns data from the data model in its source form. As such, the response data model is subject to change without notice and backwards compatibility is not guaranteed.
+
+        **WARNING: The API is only accessible using access tokens assigned to an account with superuser or service level permissions and can therefore see all data.**
+
+        The *app_label* is the name of the app category to query. The *model_name* is the name of the data model under the app category.
+
+        For the full list of app-model combinations along with their fields, see [Raw API Models](https://github.com/fresnel-software/vitruvi-sdk/wiki/Raw%20API%20Models).
+      summary: Get Model Data
+      parameters:
+      - in: query
+        name: (various - multiple)
+        schema: {}
+        description: |
+          Additional query paramaters can be added with filter criteria including column name, functions and operators.
+
+          For a complete description of filtering on raw queries, see [Filtering Raw Queries](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Raw%20APIs).
+      - in: path
+        name: app_label
+        schema:
+          type: string
+        description: The app category of the data model to query. See [Raw API Models](https://github.com/fresnel-software/vitruvi-sdk/wiki/Raw%20API%20Models).
+        required: true
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: path
+        name: model_name
+        schema:
+          type: string
+        description: The name of the data model under the app category. See [Raw API
+          Models](https://github.com/fresnel-software/vitruvi-sdk/wiki/Raw%20API%20Models).
+        required: true
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                type: string
+                default: 'Oops! There appears to be a problem with your request.Cannot
+                  resolve keyword ''some_invalid_field_name'' into field. Choices
+                  are: _design_geom, address, category, category_id, cf_values, comments,
+                  created, custom_field_values, custom_style, deliverable_payable_items,
+                  description, design, design_id, element_work_template, element_work_template_id,
+                  extended_properties, extra_work_item_request, files, folders, full_address,
+                  go_from, go_to, id, label, linked_from, linked_to, markups, measured_length,
+                  modified, network_operator, network_operator_id, photos, redline_vertices,
+                  region, region_id, represented_region, represented_region_id, status,
+                  the_geom, ticket_collection, uid, work_items'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+                default: The model invalid/name cannot be found.
+          description: Not found. App_label/model_name combination cannot be found.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/ticketing/tickets_query:
+    get:
+      operationId: api_v1_ticketing_tickets_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Tickets Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/time_keeping/timesheet_lines_query:
+    get:
+      operationId: api_v1_time_keeping_timesheet_lines_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Timesheet Lines Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/time_keeping/timesheets_query:
+    get:
+      operationId: api_v1_time_keeping_timesheets_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Timesheets Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/wbs/work_item_quantities_query:
+    get:
+      operationId: api_v1_wbs_work_item_quantities_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Work Item Quantities Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/wbs/work_items_query:
+    get:
+      operationId: api_v1_wbs_work_items_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Work Items Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/wbs/work_orders_query:
+    get:
+      operationId: api_v1_wbs_work_orders_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Work Orders Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /api/v1/wbs/work_packages_query:
+    get:
+      operationId: api_v1_wbs_work_packages_query_retrieve
+      description: |2
+
+        Query APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.
+
+        Query APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.
+
+        As they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.
+
+        When using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.
+      summary: Work Packages Grid View
+      parameters:
+      - in: query
+        name: $filter
+        schema:
+          type: string
+        description: |
+          Additional filter criteria including column names, functions and operators.
+
+          For a complete description of filtering on _query enpoints, see [Filtering Query APIs](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Query%20APIs).
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: |-
+          A comma-delimited list of fields that should be returned in the API call. If the fields parameter is omitted or empty, all fields will be returned.
+
+          If any of the fields listed in the fields parameter do not exist, these fields will be ignored and only the fields that do exist in the dataset will be returned. **No error will be raised if field names are included that do not exist in the data set.**
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      tags:
+      - Reporting
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResults'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad request. One of more of the parameters are invalid. Query
+            cannot be processsed.
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/permissions/:
+    get:
+      operationId: auth_permissions_list
+      description: Returns a list of all permissions.
+      summary: List Permissions
+      parameters:
+      - in: query
+        name: codename
+        schema:
+          type: string
+      - in: query
+        name: group
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: ordering
+        schema:
+          type: string
+        description: The name of the fields to order the results by. Multiple columns
+          can be specified as a comma separated list (i.e. id,name). Columns can also
+          be ordered in descending order by prefixing with a hyphen (i.e. -id).
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: 'A term that will be (case-insensitive) searched for in each
+          of the fields: (''name'', ''codename'')'
+      tags:
+      - Auth
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPermissionList'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    post:
+      operationId: auth_permissions_create
+      description: Creates a new permission record.
+      summary: Create Permission
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Permission'
+        required: true
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/permissions/{id}/:
+    get:
+      operationId: auth_permissions_retrieve
+      description: Retrieve permission record using the parameter criteria.
+      summary: Retrieve Permission
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this permission.
+        required: true
+      tags:
+      - Auth
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    put:
+      operationId: auth_permissions_update
+      description: Update permission record using the parameter criteria.
+      summary: Update Permission
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this permission.
+        required: true
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Permission'
+        required: true
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    patch:
+      operationId: auth_permissions_partial_update
+      description: Partial update permission record using the parameter criteria.
+      summary: Partial Update Permission
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this permission.
+        required: true
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPermission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPermission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPermission'
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    delete:
+      operationId: auth_permissions_destroy
+      description: Destroy permission record using the parameter criteria.
+      summary: Destroy Permission
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this permission.
+        required: true
+      tags:
+      - Auth
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/security_groups/:
+    get:
+      operationId: auth_security_groups_list
+      description: Returns a list of all groups.
+      summary: List Groups
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+        description: The number of records returned in the single call. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+        description: The number of records to skip. The offset value is usually equal
+          to the page_number * limit. See [API Paging](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging).
+      - in: query
+        name: ordering
+        schema:
+          type: string
+        description: The name of the fields to order the results by. Multiple columns
+          can be specified as a comma separated list (i.e. id,name). Columns can also
+          be ordered in descending order by prefixing with a hyphen (i.e. -id).
+      - in: query
+        name: permissions
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: 'A term that will be (case-insensitive) searched for in each
+          of the fields: (''name'',)'
+      tags:
+      - Auth
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRoleList'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    post:
+      operationId: auth_security_groups_create
+      description: Creates a new group record.
+      summary: Create Group
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Role'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/security_groups/{id}/:
+    get:
+      operationId: auth_security_groups_retrieve
+      description: Retrieve group record using the parameter criteria.
+      summary: Retrieve Group
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - Auth
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    put:
+      operationId: auth_security_groups_update
+      description: Update group record using the parameter criteria.
+      summary: Update Group
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Role'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    patch:
+      operationId: auth_security_groups_partial_update
+      description: Partial update group record using the parameter criteria.
+      summary: Partial Update Group
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRole'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRole'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRole'
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+    delete:
+      operationId: auth_security_groups_destroy
+      description: Destroy group record using the parameter criteria.
+      summary: Destroy Group
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - Auth
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/token/obtain:
+    post:
+      operationId: auth_token_obtain_create
+      description: |-
+        API View that receives a POST with a user's username and password.
+
+        Returns a JSON Web Token that can be used for authenticated requests.
+      summary: Obtain JWT
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WebToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WebToken'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebToken'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/token/refresh:
+    post:
+      operationId: auth_token_refresh_create
+      description: API View that returns a refreshed token (with new expiration) based
+        on existing token.
+      summary: Refresh JWT
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RefreshToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RefreshToken'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshToken'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/token/verify:
+    post:
+      operationId: auth_token_verify_create
+      description: API View that checks the veracity of a token, returning the token
+        if it is valid.
+      summary: Verify JWT
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyJSONWebToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyJSONWebToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyJSONWebToken'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyJSONWebToken'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+  /auth/user_info:
+    get:
+      operationId: auth_user_info_retrieve
+      description: Returns the current logged in user information including their
+        profile and permissions.
+      summary: Get Current User Info
+      tags:
+      - Auth
+      security:
+      - basicAuth: []
+      - jwtAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+          description: ''
+      x-internal: false
+      x-vitruvi-sdk: true
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        date_joined:
+          type: string
+          format: date-time
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        last_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        profile:
+          $ref: '#/components/schemas/Profile'
+      required:
+      - email
+      - id
+      - profile
+    AsyncApiResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required:
+      - id
+    BlankEnum:
+      enum:
+      - ''
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        primary_contact_information:
+          type: string
+          readOnly: true
+        billing_contact_information:
+          type: string
+          readOnly: true
+        employee_count:
+          type: integer
+          readOnly: true
+        extended_properties:
+          type: object
+          additionalProperties: {}
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        code:
+          type: string
+          maxLength: 255
+        type:
+          $ref: '#/components/schemas/CompanyTypeEnum'
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          maxLength: 65535
+        is_active:
+          type: boolean
+          title: Active
+        phone1:
+          type: string
+          nullable: true
+          maxLength: 20
+        phone2:
+          type: string
+          nullable: true
+          maxLength: 20
+        post_code:
+          type: string
+          nullable: true
+          maxLength: 10
+        address1:
+          type: string
+          nullable: true
+          maxLength: 255
+        address2:
+          type: string
+          nullable: true
+          maxLength: 255
+        country:
+          type: string
+          nullable: true
+          maxLength: 30
+        region:
+          type: string
+          nullable: true
+          maxLength: 30
+        city:
+          type: string
+          nullable: true
+          maxLength: 30
+        company_color:
+          type: string
+          maxLength: 7
+        logo:
+          type: string
+          format: uri
+          nullable: true
+        show_coded_labor_material_only:
+          type: boolean
+        email:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 255
+        default_user_tier:
+          $ref: '#/components/schemas/UserTierEnum'
+        system_admin_email:
+          type: string
+          format: email
+          maxLength: 255
+        primary_contact:
+          type: integer
+          nullable: true
+        billing_contact:
+          type: integer
+          nullable: true
+        permission_group:
+          type: integer
+          nullable: true
+        admin_permission_group:
+          type: integer
+          nullable: true
+        read_permission:
+          type: integer
+          nullable: true
+        admin_permission:
+          type: integer
+          nullable: true
+        denied_permission:
+          type: integer
+          nullable: true
+      required:
+      - billing_contact_information
+      - code
+      - created
+      - employee_count
+      - id
+      - modified
+      - name
+      - primary_contact_information
+    CompanyTypeEnum:
+      enum:
+      - 'NO'
+      - EPC
+      - SC
+      type: string
+      description: |-
+        * `NO` - NO
+        * `EPC` - EPC
+        * `SC` - SC
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    FullCrewPersonRole:
+      type: object
+      properties:
+        crew:
+          type: integer
+          readOnly: true
+        crew_name:
+          type: string
+          readOnly: true
+        role:
+          type: integer
+          readOnly: true
+        role_name:
+          type: string
+          readOnly: true
+      required:
+      - crew
+      - crew_name
+      - role
+      - role_name
+    GenericResults:
+      type: object
+      properties:
+        count:
+          type: integer
+          default: 4376
+        next:
+          type: string
+          default: http://my_workspace.api.vitruvi.cc/api/v1/path/to/endpoint?fields=id%2Cname&limit=200&offset=600
+        previous:
+          type: string
+          default: http://my_workspace.api.vitruvi.cc/api/v1/path/to/endpoint?fields=id%2Cname&limit=200&offset=200
+        results:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          default:
+          - id: 10319
+            name: Some Object Name
+            '...other fields...': example value
+          - id: 10533
+            name: Object 2
+            '...other fields...': more values
+    PaginatedCompanyList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+    PaginatedPermissionList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    PaginatedRoleList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+    PatchedCompany:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        primary_contact_information:
+          type: string
+          readOnly: true
+        billing_contact_information:
+          type: string
+          readOnly: true
+        employee_count:
+          type: integer
+          readOnly: true
+        extended_properties:
+          type: object
+          additionalProperties: {}
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        code:
+          type: string
+          maxLength: 255
+        type:
+          $ref: '#/components/schemas/CompanyTypeEnum'
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          maxLength: 65535
+        is_active:
+          type: boolean
+          title: Active
+        phone1:
+          type: string
+          nullable: true
+          maxLength: 20
+        phone2:
+          type: string
+          nullable: true
+          maxLength: 20
+        post_code:
+          type: string
+          nullable: true
+          maxLength: 10
+        address1:
+          type: string
+          nullable: true
+          maxLength: 255
+        address2:
+          type: string
+          nullable: true
+          maxLength: 255
+        country:
+          type: string
+          nullable: true
+          maxLength: 30
+        region:
+          type: string
+          nullable: true
+          maxLength: 30
+        city:
+          type: string
+          nullable: true
+          maxLength: 30
+        company_color:
+          type: string
+          maxLength: 7
+        logo:
+          type: string
+          format: uri
+          nullable: true
+        show_coded_labor_material_only:
+          type: boolean
+        email:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 255
+        default_user_tier:
+          $ref: '#/components/schemas/UserTierEnum'
+        system_admin_email:
+          type: string
+          format: email
+          maxLength: 255
+        primary_contact:
+          type: integer
+          nullable: true
+        billing_contact:
+          type: integer
+          nullable: true
+        permission_group:
+          type: integer
+          nullable: true
+        admin_permission_group:
+          type: integer
+          nullable: true
+        read_permission:
+          type: integer
+          nullable: true
+        admin_permission:
+          type: integer
+          nullable: true
+        denied_permission:
+          type: integer
+          nullable: true
+    PatchedPermission:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        codename:
+          type: string
+          maxLength: 100
+    PatchedRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            type: integer
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        codename:
+          type: string
+          maxLength: 100
+      required:
+      - codename
+      - id
+      - name
+    Profile:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        full_name:
+          type: string
+          readOnly: true
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+        account:
+          type: integer
+          readOnly: true
+        hourly_rate:
+          type: number
+          format: double
+          maximum: 100000000
+          minimum: -100000000
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          nullable: true
+        overtime_rate:
+          type: number
+          format: double
+          maximum: 100000000
+          minimum: -100000000
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          nullable: true
+        city:
+          type: string
+          nullable: true
+          maxLength: 30
+        region:
+          type: string
+          nullable: true
+          maxLength: 30
+        country:
+          type: string
+          nullable: true
+          maxLength: 30
+        address1:
+          type: string
+          nullable: true
+          maxLength: 255
+        address2:
+          type: string
+          nullable: true
+          maxLength: 255
+        post_code:
+          type: string
+          nullable: true
+          maxLength: 10
+        phone1:
+          type: string
+          nullable: true
+          maxLength: 20
+        phone2:
+          type: string
+          nullable: true
+          maxLength: 20
+        division:
+          type: string
+          nullable: true
+          maxLength: 30
+        notes:
+          type: string
+          nullable: true
+          maxLength: 65535
+        roles:
+          type: array
+          items:
+            type: integer
+        role_names:
+          type: string
+          readOnly: true
+        company:
+          type: integer
+        company_name:
+          type: string
+          readOnly: true
+        company_type:
+          allOf:
+          - $ref: '#/components/schemas/CompanyTypeEnum'
+          readOnly: true
+        qualifications:
+          type: array
+          items:
+            type: integer
+        assigned_crews:
+          type: array
+          items:
+            $ref: '#/components/schemas/FullCrewPersonRole'
+          readOnly: true
+        supervisor_full_name:
+          type: string
+          readOnly: true
+        supervisor:
+          type: integer
+          nullable: true
+        employee_id:
+          type: string
+          nullable: true
+          maxLength: 16
+        crew_leads:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        related_crews_names:
+          type: string
+          readOnly: true
+        user_tier:
+          oneOf:
+          - $ref: '#/components/schemas/UserTierEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        full_name_with_email:
+          type: string
+          readOnly: true
+        supervisor_full_name_with_email:
+          type: string
+          readOnly: true
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+          readOnly: true
+        show_coded_labor_material_only:
+          type: boolean
+          readOnly: true
+      required:
+      - account
+      - assigned_crews
+      - company_name
+      - company_type
+      - crew_leads
+      - email
+      - first_name
+      - full_name
+      - full_name_with_email
+      - id
+      - is_active
+      - last_name
+      - related_crews_names
+      - role_names
+      - show_coded_labor_material_only
+      - supervisor_full_name
+      - supervisor_full_name_with_email
+    RefreshToken:
+      type: object
+      description: Refresh an access token.
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            type: integer
+      required:
+      - id
+      - name
+    UserInfo:
+      type: object
+      properties:
+        token:
+          type: string
+        refrsh_token:
+          type: string
+        user:
+          $ref: '#/components/schemas/Account'
+        modules:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: string
+      required:
+      - modules
+      - permissions
+      - refrsh_token
+      - token
+      - user
+    UserTierEnum:
+      enum:
+      - Office User
+      - Field User
+      - Read Only
+      - Support
+      - Service
+      - No Login
+      type: string
+      description: |-
+        * `Office User` - Office User
+        * `Field User` - Field User
+        * `Read Only` - Read Only
+        * `Support` - Support
+        * `Service` - Service
+        * `No Login` - No Login
+    VerifyJSONWebToken:
+      type: object
+      description: Check the veracity of an access token.
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    WebToken:
+      type: object
+      description: |-
+        Serializer class used to validate a username and password.
+
+        'username' is identified by the custom UserModel.USERNAME_FIELD.
+
+        Returns a JSON Web Token that can be used to authenticate later calls.
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - password
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "JWT"
+    tokenAuth:
+      type: http
+      scheme: bearer
