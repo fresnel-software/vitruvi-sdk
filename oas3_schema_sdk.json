@@ -126,9 +126,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "post": {
                 "operationId": "api_v1_companies_create",
@@ -179,9 +177,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/companies/{id}/": {
@@ -225,9 +221,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "put": {
                 "operationId": "api_v1_companies_update",
@@ -289,9 +283,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "patch": {
                 "operationId": "api_v1_companies_partial_update",
@@ -352,9 +344,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "delete": {
                 "operationId": "api_v1_companies_destroy",
@@ -389,9 +379,7 @@
                     "204": {
                         "description": "No response body"
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/companies/{id}/download_logo/": {
@@ -435,15 +423,13 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/engineering/design_elements_query": {
             "get": {
                 "operationId": "api_v1_engineering_design_elements_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Design Elements Grid View",
                 "parameters": [
                     {
@@ -528,15 +514,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/engineering/design_elements_work_items_query": {
             "get": {
                 "operationId": "api_v1_engineering_design_elements_work_items_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Design Elements Work Items Grid View",
                 "parameters": [
                     {
@@ -609,15 +593,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/engineering/limited_design_elements_query": {
             "get": {
                 "operationId": "api_v1_engineering_limited_design_elements_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Limited Design Elements Grid View",
                 "parameters": [
                     {
@@ -702,15 +684,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/invoicing/invoice_items_query": {
             "get": {
                 "operationId": "api_v1_invoicing_invoice_items_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Invoice Items Grid View",
                 "parameters": [
                     {
@@ -783,15 +763,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/invoicing/invoices_query": {
             "get": {
                 "operationId": "api_v1_invoicing_invoices_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Invoices Grid View",
                 "parameters": [
                     {
@@ -864,9 +842,7 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/job_status/{id}": {
@@ -921,15 +897,13 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/production/production_report_grid_query": {
             "get": {
                 "operationId": "api_v1_production_production_report_grid_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Production Report Grid Grid View",
                 "parameters": [
                     {
@@ -1002,15 +976,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/production/production_reports_query": {
             "get": {
                 "operationId": "api_v1_production_production_reports_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Production Reports Grid View",
                 "parameters": [
                     {
@@ -1083,15 +1055,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/raw/{app_label}/{model_name}": {
             "get": {
                 "operationId": "api_v1_raw_retrieve",
-                "description": "\nFor applications where performance is of high importance, the raw API can be used to access data for each data model directly without calculations, manipulations or user level security.\n\nPlease note however that as this API is designed for performance and returns data from the data model in its source form. As such, the response data model is subject to change without notice and backwards compatibility is not guaranteed. \n\n**WARNING: The API is only accessible using access tokens assigned to an account with superuser or service level permissions and can therefore see all data.**\n\nThe *app_label* is the name of the app category to query. The *model_name* is the name of the data model under the app category.\n\nFor the full list of app-model combinations along with their fields, see [Raw API Models](https://github.com/fresnel-software/vitruvi-sdk/wiki/Raw%20API%20Models).\n",
+                "description": "\nFor applications where performance is of high importance, the raw API can be used to access data for each data model directly without calculations, manipulations or user level security.\n\nPlease note however that as this API is designed for performance and returns data from the data model in its source form. As such, the response data model is subject to change without notice and backwards compatibility is not guaranteed.\n\n**WARNING: The API is only accessible using access tokens assigned to an account with superuser or service level permissions and can therefore see all data.**\n\nThe *app_label* is the name of the app category to query. The *model_name* is the name of the data model under the app category.\n\nFor the full list of app-model combinations along with their fields, see [Raw API Models](https://github.com/fresnel-software/vitruvi-sdk/wiki/Raw%20API%20Models).\n",
                 "summary": "Get Model Data",
                 "parameters": [
                     {
@@ -1192,15 +1162,13 @@
                         },
                         "description": "Not found. App_label/model_name combination cannot be found."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/ticketing/tickets_query": {
             "get": {
                 "operationId": "api_v1_ticketing_tickets_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Tickets Grid View",
                 "parameters": [
                     {
@@ -1273,15 +1241,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/time_keeping/timesheet_lines_query": {
             "get": {
                 "operationId": "api_v1_time_keeping_timesheet_lines_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Timesheet Lines Grid View",
                 "parameters": [
                     {
@@ -1354,15 +1320,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/time_keeping/timesheets_query": {
             "get": {
                 "operationId": "api_v1_time_keeping_timesheets_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Timesheets Grid View",
                 "parameters": [
                     {
@@ -1435,15 +1399,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/wbs/work_item_quantities_query": {
             "get": {
                 "operationId": "api_v1_wbs_work_item_quantities_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Work Item Quantities Grid View",
                 "parameters": [
                     {
@@ -1516,15 +1478,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/wbs/work_items_query": {
             "get": {
                 "operationId": "api_v1_wbs_work_items_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Work Items Grid View",
                 "parameters": [
                     {
@@ -1597,15 +1557,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/wbs/work_orders_query": {
             "get": {
                 "operationId": "api_v1_wbs_work_orders_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Work Orders Grid View",
                 "parameters": [
                     {
@@ -1678,15 +1636,13 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/api/v1/wbs/work_packages_query": {
             "get": {
                 "operationId": "api_v1_wbs_work_packages_query_retrieve",
-                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`. \n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload. \n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
+                "description": "\nQuery APIs are any API endpoints that are suffixed with `_query`. These APIs differ from other APIs in that they offer pre-joined, and pre-normalized (flattened) results without the need to make multiple API calls to be joined and transformed in another system.\n\nQuery APIs are useful when trying to get results around a particular entity type such as `Design Elements` or `Work Items`.\n\nAs they are pre-joined they offer a very simply way of getting all the information related to those items, however this comes with the cost of an increased payload.\n\nWhen using these queries, pay particular attention to the [page size](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Paging) and [field selection](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Field%20Selection) in order to control the total payload to improve performance.\n",
                 "summary": "Work Packages Grid View",
                 "parameters": [
                     {
@@ -1759,9 +1715,7 @@
                         },
                         "description": "Bad request. One of more of the parameters are invalid. Query cannot be processsed."
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/permissions/": {
@@ -1849,9 +1803,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "post": {
                 "operationId": "auth_permissions_create",
@@ -1902,9 +1854,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/permissions/{id}/": {
@@ -1948,9 +1898,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "put": {
                 "operationId": "auth_permissions_update",
@@ -2012,9 +1960,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "patch": {
                 "operationId": "auth_permissions_partial_update",
@@ -2075,9 +2021,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "delete": {
                 "operationId": "auth_permissions_destroy",
@@ -2112,9 +2056,7 @@
                     "204": {
                         "description": "No response body"
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/security_groups/": {
@@ -2195,9 +2137,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "post": {
                 "operationId": "auth_security_groups_create",
@@ -2248,9 +2188,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/security_groups/{id}/": {
@@ -2294,9 +2232,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "put": {
                 "operationId": "auth_security_groups_update",
@@ -2358,9 +2294,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "patch": {
                 "operationId": "auth_security_groups_partial_update",
@@ -2421,9 +2355,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             },
             "delete": {
                 "operationId": "auth_security_groups_destroy",
@@ -2458,9 +2390,7 @@
                     "204": {
                         "description": "No response body"
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/token/obtain": {
@@ -2502,9 +2432,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/token/refresh": {
@@ -2546,9 +2474,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/token/verify": {
@@ -2590,9 +2516,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         },
         "/auth/user_info": {
@@ -2625,9 +2549,7 @@
                         },
                         "description": ""
                     }
-                },
-                "x-internal": false,
-                "x-vitruvi-sdk": true
+                }
             }
         }
     },
