@@ -1070,12 +1070,6 @@
                 "summary": "Get Model Data",
                 "parameters": [
                     {
-                        "in": "query",
-                        "name": "(various - multiple)",
-                        "schema": {},
-                        "description": "Additional query paramaters can be added with filter criteria including column name, functions and operators.\n\nFor a complete description of filtering on raw queries, see [Filtering Raw Queries](https://github.com/fresnel-software/vitruvi-sdk/wiki/API%20Filtering%20Raw%20APIs).\n"
-                    },
-                    {
                         "in": "path",
                         "name": "app_label",
                         "schema": {
