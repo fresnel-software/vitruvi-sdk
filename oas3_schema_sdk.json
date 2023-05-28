@@ -5,6 +5,11 @@
         "version": "2.0.0",
         "description": "Vitruvi SDK API reference. This API schema is used solely for the auto generation of the Vitruvi SDK libraries."
     },
+    "servers": [
+        {
+            "url": "/"
+        }
+    ],
     "paths": {
         "/api/v1/companies/": {
             "get": {
